@@ -57,7 +57,7 @@ def ttl_to_html(ttl_file, output_file):
             else:
                 obj_label = _local_name(str(obj))
 
-            triples.append((subj_label, pred_label, obj_label))
+            triples.append({"subject": subj_label, "predicate": pred_label, "object": obj_label})
             print(f"  {subj_label} --[{pred_label}]--> {obj_label}")
 
         print(f"\nLoaded {len(triples)} triples from {ttl_file}")

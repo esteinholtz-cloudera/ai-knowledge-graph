@@ -27,12 +27,20 @@ def ttl_to_html(ttl_file, output_file):
         ttl_file: Path to Turtle (.ttl) file
         output_file: Path to save the HTML visualization
     """
-    # Predicates that are ontology/infrastructure — not domain relationships
+    # Predicates filtered out before rendering.
+    # TODO: Replace hard-coded filtering with UI toggle controls so users can
+    #       show/hide infrastructure edges (sourceDocument, hash, url, name)
+    #       interactively in the graph — similar to the existing inferred-edge filter.
     _SKIP_PREDICATES = {
         str(RDF.type),
         str(RDFS.label),
         str(RDFS.comment),
         str(OWL.imports),
+        # Document provenance predicates — noisy in the visual graph
+        "http://example.org/doc/sourceDocument",
+        "http://example.org/kg/hash",
+        "http://schema.org/url",
+        "http://schema.org/name",
     }
 
     try:
